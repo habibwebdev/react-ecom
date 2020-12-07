@@ -1,0 +1,22 @@
+{
+  "name": "react-ecom",
+  "version": "1.0.0",
+  "description": "React-Ecom",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/habibwebdev/react-ecom.git"
+  },
+  "author": "Abbas Ali",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/habibwebdev/react-ecom/issues"
+  },
+  "homepage": "https://github.com/habibwebdev/react-ecom#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
