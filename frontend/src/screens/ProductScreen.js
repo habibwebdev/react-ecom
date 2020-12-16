@@ -8,7 +8,7 @@ import Message from '../components/Message'
 import { listProductDetails } from '../actions/productActions'
 
 const ProductScreen = ({ history, match }) => {
-  const [qty, setQty] = useState(0)
+  const [qty, setQty] = useState(1)
 
   const dispatch = useDispatch()
 
@@ -102,6 +102,7 @@ const ProductScreen = ({ history, match }) => {
 
                 <ListGroup.Item>
                   <Button
+                    id="addToCartBtn"
                     className="btn-block"
                     type="button"
                     disabled={product.countInStock === 0}
