@@ -1,3 +1,7 @@
+// Add this in your component file
+// require('react-dom')
+// window.React2 = require('react')
+// console.log(window.React1 === window.React2)
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Col, Row } from 'react-bootstrap'
