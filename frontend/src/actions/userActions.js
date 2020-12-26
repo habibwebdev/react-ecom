@@ -134,7 +134,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     }
 
     // ${id} is the profile
-    const { data } = await axios.get(`api/users/${id}`, config)
+    const { data } = await axios.get(`/api/users/${id}`, config)
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
