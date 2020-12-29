@@ -15,3 +15,9 @@ export const ORDER_MY_LIST_REQUEST = 'ORDER_MY_LIST_REQUEST'
 export const ORDER_MY_LIST_SUCCESS = 'ORDER_MY_LIST_SUCCESS'
 export const ORDER_MY_LIST_FAIL = 'ORDER_MY_LIST_FAIL'
 export const ORDER_MY_LIST_RESET = 'ORDER_MY_LIST_RESET'
+
+// For admin to get all the order for OrderScreen.js
+export const ORDER_LIST_REQUEST = 'ORDER_LIST_REQUEST'
+export const ORDER_LIST_SUCCESS = 'ORDER_LIST_SUCCESS'
+export const ORDER_LIST_FAIL = 'ORDER_LIST_FAIL'
+export const ORDER_LIST_RESET = 'ORDER_LIST_RESET'
