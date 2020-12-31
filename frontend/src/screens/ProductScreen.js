@@ -12,6 +12,7 @@ import {
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 
 const ProductScreen = ({ history, match }) => {
+  const [visible, setVisible] = useState(true)
   const [qty, setQty] = useState(1)
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
@@ -39,7 +40,15 @@ const ProductScreen = ({ history, match }) => {
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
     }
     dispatch(listProductDetails(match.params.id))
-  }, [dispatch, match, successProductReview])
+
+    // working with the message alert for 3secs only.
+    if (errorProductReview) {
+      setTimeout(() => {
+        setVisible(false)
+      }, 3000)
+      setVisible(true)
+    }
+  }, [dispatch, match, successProductReview, errorProductReview])
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`)
@@ -47,11 +56,7 @@ const ProductScreen = ({ history, match }) => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    if (errorProductReview) {
-      setTimeout(() => {
-        document.querySelector('.alert.alert-danger.show').remove()
-      }, 3000)
-    }
+
     // Dispatch action to create review for product by logged in user
     dispatch(
       createProductReview(match.params.id, {
@@ -165,7 +170,7 @@ const ProductScreen = ({ history, match }) => {
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
                 {product.reviews.map((review) => (
-                  <ListGroup.Item key={review.id}>
+                  <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
                     <p>{review.createdAt.substring(0, 10)}</p>
@@ -174,7 +179,7 @@ const ProductScreen = ({ history, match }) => {
                 ))}
                 <ListGroup.Item>
                   <h2>Write a Customer Review</h2>
-                  {errorProductReview && (
+                  {errorProductReview && visible && (
                     <Message variant="danger">{errorProductReview}</Message>
                   )}
                   {userInfo ? (
