@@ -66,7 +66,7 @@ const OrderScreen = ({ match, history }) => {
     }
 
     // addPayPalScript()
-    if (!order || successPay || successDeliver) {
+    if (!order || successPay || successDeliver || order._id !== orderId) {
       // Dispatch directly from orderscreen not from orderAction.js for RESET
       dispatch({ type: ORDER_PAY_RESET })
 

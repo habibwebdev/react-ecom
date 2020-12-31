@@ -26,12 +26,6 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            {/* Embed the SearchBox(it won't work)  */}
-            {/* <SearchBox /> */}
-            {/* SearchBox embeded */}
-
-            {/* Right way to render the component inside another component via render props */}
-            <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>
@@ -72,6 +66,12 @@ const Header = () => {
                 </NavDropdown>
               )}
             </Nav>
+            {/* Embed the SearchBox(it won't work)  */}
+            {/* <SearchBox /> */}
+            {/* SearchBox embeded */}
+
+            {/* Right way to render the component inside another component via render props */}
+            <Route render={({ history }) => <SearchBox history={history} />} />
           </Navbar.Collapse>
         </Container>
       </Navbar>

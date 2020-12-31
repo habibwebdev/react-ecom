@@ -26,6 +26,7 @@ const ProductScreen = ({ history, match }) => {
   const productReviewCreate = useSelector((state) => state.productReviewCreate)
   const {
     success: successProductReview,
+    loading: loadingProductReview,
     error: errorProductReview,
   } = productReviewCreate
 
@@ -37,10 +38,13 @@ const ProductScreen = ({ history, match }) => {
       alert('Review Submitted!')
       setRating(0)
       setComment('')
-      // Dispatch action for review reset
+    }
+    if (!product._id || product._id !== match.params.id) {
+      // Dispatch action to get the product by ID
+      dispatch(listProductDetails(match.params.id))
+      // Dispatch the action to reset the create product review
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
     }
-    dispatch(listProductDetails(match.params.id))
 
     // working with the message alert for 3secs only.
     if (errorProductReview) {
@@ -49,7 +53,7 @@ const ProductScreen = ({ history, match }) => {
       }, 3000)
       setVisible(true)
     }
-  }, [dispatch, match, successProductReview, errorProductReview])
+  }, [dispatch, match, successProductReview, errorProductReview, product._id])
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`)
@@ -181,6 +185,12 @@ const ProductScreen = ({ history, match }) => {
                 ))}
                 <ListGroup.Item>
                   <h2>Write a Customer Review</h2>
+                  {successProductReview && (
+                    <Message variant="success">
+                      Review submitted successfully
+                    </Message>
+                  )}
+                  {loadingProductReview && <Loader />}
                   {errorProductReview && visible && (
                     <Message variant="danger">{errorProductReview}</Message>
                   )}
@@ -210,7 +220,11 @@ const ProductScreen = ({ history, match }) => {
                           onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>
                       </Form.Group>
-                      <Button type="submit" variant="primary">
+                      <Button
+                        disabled={loadingProductReview}
+                        type="submit"
+                        variant="primary"
+                      >
                         Submit
                       </Button>
                     </Form>
